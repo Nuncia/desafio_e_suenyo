@@ -123,7 +123,7 @@
       artista: artista.value,
       tono: tono.value,
     };
-    console.log(data);
+    console.log('data: ',data);
     axios.post(url, data).then(() => getData());
   }
 
