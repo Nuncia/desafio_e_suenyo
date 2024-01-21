@@ -3,6 +3,7 @@ const router = express.Router();
 const fs = require('fs');
 
 router.get('/', (req,res) => {
+    console.log(res.sendFile(__dirname + "/index.html"))
     res.sendFile(__dirname + "/index.html");  
 });
 
@@ -14,8 +15,8 @@ router.get('/canciones', (req,res) => {
 router.post('/canciones', (req,res) => {
     const cancion = req.body;
     const canciones = JSON.parse(fs.readFileSync('canciones.json', 'utf-8'));
+    console.log('cancion: ', cancion)
     canciones.push(cancion);
-    console.log('cancion: ', cancion);
     fs.writeFileSync('canciones.json', JSON.stringify(canciones));
     res.send('Canción agregada con éxito!');
 })
@@ -29,4 +30,4 @@ router.delete('/canciones/:id', (req,res) => {
     res.send('Canción eliminada con éxito');
 })
 
-module.exports = router;
+// module.exports = router;
