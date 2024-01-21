@@ -15,7 +15,9 @@ router.post('/canciones', (req,res) => {
     const cancion = req.body;
     const canciones = JSON.parse(fs.readFileSync('canciones.json', 'utf-8'));
     canciones.push(cancion);
+    console.log('cancion: ', cancion);
     fs.writeFileSync('canciones.json', JSON.stringify(canciones));
+    res.send('Canción agregada con éxito!');
 })
 
 router.delete('/canciones/:id', (req,res) => {
@@ -24,6 +26,7 @@ router.delete('/canciones/:id', (req,res) => {
     const indice = canciones.findIndex((item) => item.id == id);
     canciones.splice(indice,1);
     fs.writeFileSync('canciones.json',JSON.stringify(canciones));
+    res.send('Canción eliminada con éxito');
 })
 
 module.exports = router;
